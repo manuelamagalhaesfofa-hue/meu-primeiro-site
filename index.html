@@ -1,0 +1,1627 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>IT Girl Era — Glow Up 50 Dias</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --r: #C9607A;
+  --r2: #9E3A54;
+  --r3: #6B1E35;
+  --rl: #F7E0E6;
+  --rl2: #FDF3F5;
+  --g: #C9A96E;
+  --gl: #F5ECD8;
+  --cr: #F9EEE8;
+  --bg: #FDF9F7;
+  --card: #FFFFFF;
+  --t1: #1E0E14;
+  --t2: #6B4050;
+  --t3: #B09099;
+  --bd: rgba(201,96,122,0.12);
+  --pu: #9B7BB5; --pul: #EDE5F5;
+  --te: #5A9E8F; --tel: #DFF0ED;
+  --am: #C9883A; --aml: #FAF0DA;
+  --sh: 0 4px 24px rgba(201,96,122,0.12);
+  --sh2: 0 12px 40px rgba(201,96,122,0.2);
+  --rd: 16px; --rd2: 24px;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Jost', sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--t1);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+.ambient { position: fixed; pointer-events: none; z-index: 0; }
+.ambient-1 { width: 700px; height: 700px; top: -200px; right: -200px; background: radial-gradient(circle, rgba(201,96,122,0.07) 0%, transparent 65%); }
+.ambient-2 { width: 500px; height: 500px; bottom: -100px; left: -150px; background: radial-gradient(circle, rgba(201,169,110,0.06) 0%, transparent 65%); }
+.ambient-3 { width: 400px; height: 400px; top: 40%; left: 30%; background: radial-gradient(circle, rgba(155,123,181,0.04) 0%, transparent 65%); }
+
+#splash {
+  position: fixed; inset: 0; z-index: 9999;
+  background: var(--r3);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  overflow: hidden;
+  transition: opacity 1s ease, transform 1s ease;
+}
+#splash.out { opacity: 0; transform: scale(1.06); pointer-events: none; }
+.splash-petals { position: absolute; inset: 0; overflow: hidden; }
+.petal {
+  position: absolute;
+  width: 8px; height: 14px;
+  background: rgba(247,224,230,0.15);
+  border-radius: 50% 0 50% 0;
+  animation: fall linear infinite;
+}
+@keyframes fall {
+  0% { transform: translateY(-20px) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 0.5; }
+  100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+}
+.splash-inner { position: relative; z-index: 2; text-align: center; padding: 40px; }
+.splash-crown { font-size: 56px; margin-bottom: 20px; animation: float 3s ease-in-out infinite; }
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+.splash-title {
+  font-family: var(--font-serif);
+  font-size: clamp(40px, 8vw, 72px);
+  font-weight: 300; color: #fff;
+  letter-spacing: 0.05em; line-height: 1.1; margin-bottom: 8px;
+}
+.splash-title em { font-style: italic; color: var(--gl); font-weight: 300; }
+.splash-tagline {
+  font-size: 13px; color: rgba(255,255,255,0.6);
+  letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 48px;
+}
+.splash-line { width: 60px; height: 1px; background: rgba(255,255,255,0.3); margin: 20px auto; }
+.splash-cta {
+  display: inline-flex; align-items: center; gap: 12px;
+  padding: 16px 48px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 100px; color: #fff;
+  font-family: var(--font-sans);
+  font-size: 14px; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  cursor: pointer; transition: all 0.3s;
+  backdrop-filter: blur(10px);
+}
+.splash-cta:hover {
+  background: rgba(255,255,255,0.2);
+  border-color: rgba(255,255,255,0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+}
+
+#app { display: none; position: relative; z-index: 1; }
+#app.on { display: block; }
+
+.topbar {
+  position: sticky; top: 0; z-index: 200;
+  background: rgba(253,249,247,0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--bd);
+  height: 64px;
+  display: flex; align-items: center;
+  padding: 0 24px; gap: 16px;
+}
+.topbar-logo {
+  font-family: var(--font-serif);
+  font-size: 22px; font-weight: 600;
+  color: var(--r3); white-space: nowrap; flex-shrink: 0;
+}
+.topbar-logo span { color: var(--g); font-style: italic; }
+.topbar-nav {
+  display: flex; gap: 2px;
+  background: var(--rl2);
+  border-radius: 100px; padding: 4px;
+  border: 1px solid var(--bd);
+  overflow-x: auto; scrollbar-width: none;
+  flex: 1; min-width: 0;
+}
+.topbar-nav::-webkit-scrollbar { display: none; }
+.tnav {
+  flex-shrink: 0; padding: 7px 16px;
+  border: none; border-radius: 100px;
+  background: transparent;
+  font-family: var(--font-sans);
+  font-size: 13px; font-weight: 400;
+  color: var(--t2); cursor: pointer;
+  transition: all 0.2s; white-space: nowrap;
+}
+.tnav.on {
+  background: var(--r); color: #fff;
+  font-weight: 500;
+  box-shadow: 0 2px 12px rgba(201,96,122,0.35);
+}
+.topbar-progress { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.tp-ring { width: 36px; height: 36px; position: relative; }
+.tp-ring svg { transform: rotate(-90deg); }
+.tp-ring circle { transition: stroke-dashoffset 0.5s ease; }
+.tp-pct {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 9px; font-weight: 600; color: var(--r);
+}
+
+.page-wrap { max-width: 960px; margin: 0 auto; padding: 32px 24px 100px; }
+
+.sec { display: none; }
+.sec.on { display: block; animation: rise 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+@keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+.sec-head { margin-bottom: 28px; }
+.sec-head h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 5vw, 40px);
+  font-weight: 400; color: var(--r3); line-height: 1.2;
+}
+.sec-head p { font-size: 14px; color: var(--t2); margin-top: 6px; line-height: 1.6; }
+
+.hero {
+  background: linear-gradient(135deg, var(--r3) 0%, #4A1225 50%, #2A0A16 100%);
+  border-radius: var(--rd2); padding: 40px; color: #fff;
+  margin-bottom: 24px; position: relative; overflow: hidden;
+}
+.hero-deco {
+  position: absolute;
+  font-family: var(--font-serif);
+  font-size: 180px; font-weight: 700;
+  color: rgba(255,255,255,0.03);
+  top: -20px; right: -20px; line-height: 1;
+  pointer-events: none; user-select: none;
+}
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 100px; padding: 4px 14px;
+  font-size: 11px; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--gl); margin-bottom: 16px;
+}
+.hero h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(26px, 4vw, 44px);
+  font-weight: 400; line-height: 1.25; margin-bottom: 10px;
+}
+.hero h1 em { font-style: italic; color: var(--gl); }
+.hero-sub { font-size: 14px; opacity: 0.75; line-height: 1.7; max-width: 520px; margin-bottom: 28px; }
+.hero-prog-wrap { background: rgba(255,255,255,0.1); border-radius: 100px; height: 4px; margin-bottom: 6px; }
+.hero-prog-fill {
+  height: 4px; border-radius: 100px;
+  background: linear-gradient(90deg, var(--rl), var(--gl));
+  transition: width 0.6s cubic-bezier(0.16,1,0.3,1);
+}
+.hero-prog-label { font-size: 12px; opacity: 0.65; display: flex; justify-content: space-between; margin-bottom: 28px; }
+.hero-stats {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 1px; background: rgba(255,255,255,0.1);
+  border-radius: 14px; overflow: hidden;
+}
+.hstat { background: rgba(255,255,255,0.06); padding: 16px; text-align: center; }
+.hstat-n { font-family: var(--font-serif); font-size: 36px; font-weight: 600; color: var(--rl); line-height: 1; }
+.hstat-l { font-size: 10px; opacity: 0.6; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 4px; }
+
+.next-card {
+  background: var(--r); border-radius: var(--rd2);
+  padding: 24px 28px; color: #fff; margin-bottom: 20px;
+  position: relative; overflow: hidden; cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.next-card:hover { transform: translateY(-3px); box-shadow: var(--sh2); }
+.next-card-deco { position: absolute; right: 24px; top: 50%; transform: translateY(-50%); font-size: 64px; opacity: 0.12; }
+.next-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.75; margin-bottom: 8px; }
+.next-day { font-family: var(--font-serif); font-size: 22px; font-weight: 600; margin-bottom: 6px; }
+.next-desc { font-size: 13px; opacity: 0.85; line-height: 1.5; max-width: 380px; }
+.next-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  margin-top: 16px; background: rgba(255,255,255,0.18);
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 100px; color: #fff;
+  font-family: var(--font-sans); font-size: 12px;
+  font-weight: 500; letter-spacing: 0.05em;
+  padding: 8px 20px; cursor: pointer; transition: all 0.2s;
+}
+.next-btn:hover { background: rgba(255,255,255,0.28); }
+
+.pillar-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 14px; margin-bottom: 24px;
+}
+.pillar {
+  background: var(--card); border: 1px solid var(--bd);
+  border-radius: var(--rd2); padding: 22px;
+  transition: all 0.25s; cursor: default;
+}
+.pillar:hover { border-color: var(--r); transform: translateY(-4px); box-shadow: var(--sh); }
+.pillar-icon { font-size: 32px; margin-bottom: 12px; }
+.pillar-name { font-family: var(--font-serif); font-size: 17px; font-weight: 600; color: var(--r3); margin-bottom: 6px; }
+.pillar-desc { font-size: 13px; color: var(--t2); line-height: 1.6; }
+
+.phases-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-bottom: 24px; }
+.phase-tile {
+  background: var(--card); border: 1px solid var(--bd);
+  border-radius: var(--rd); padding: 18px 16px;
+  position: relative; overflow: hidden;
+}
+.phase-tile::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+  width: 3px; border-radius: 3px 0 0 3px;
+}
+.phase-tile.p1::before { background: var(--r); }
+.phase-tile.p2::before { background: var(--pu); }
+.phase-tile.p3::before { background: var(--g); }
+.phase-tile.p4::before { background: var(--te); }
+.phase-days { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--t3); margin-bottom: 6px; }
+.phase-name { font-family: var(--font-serif); font-size: 16px; font-weight: 600; color: var(--t1); margin-bottom: 4px; }
+.phase-desc { font-size: 12px; color: var(--t2); line-height: 1.5; }
+
+.quote {
+  border-left: 2px solid var(--r); padding: 14px 20px;
+  background: linear-gradient(to right, var(--rl2), transparent);
+  border-radius: 0 var(--rd) var(--rd) 0; margin: 20px 0;
+}
+.quote p { font-family: var(--font-serif); font-size: 17px; font-style: italic; color: var(--r2); line-height: 1.7; }
+
+.phase-sep { display: flex; align-items: center; gap: 14px; margin: 28px 0 14px; }
+.phase-sep-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 16px; border-radius: 100px;
+  font-size: 12px; font-weight: 500;
+  white-space: nowrap; flex-shrink: 0;
+}
+.phase-sep-line { flex: 1; height: 1px; background: var(--bd); }
+.phase-sep-count { font-size: 12px; color: var(--t3); white-space: nowrap; }
+
+.days-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 10px; margin-bottom: 8px;
+}
+.dcard {
+  background: var(--card); border: 1px solid var(--bd);
+  border-radius: var(--rd); padding: 16px 14px;
+  cursor: pointer; transition: all 0.2s; position: relative;
+}
+.dcard:hover { border-color: var(--r); box-shadow: var(--sh); transform: translateY(-2px); }
+.dcard.done { background: var(--rl2); border-color: rgba(201,96,122,0.25); }
+.dcard.done::after {
+  content: '✓'; position: absolute; top: 12px; right: 14px;
+  color: var(--r); font-size: 13px; font-weight: 700;
+}
+.dcard-num { font-size: 10px; color: var(--t3); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 5px; }
+.dcard-focus { font-size: 13px; font-weight: 500; color: var(--t1); line-height: 1.4; margin-bottom: 8px; }
+.dtag { display: inline-block; font-size: 10px; font-weight: 500; padding: 3px 10px; border-radius: 100px; }
+
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(30,14,20,0.6); z-index: 500;
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px; backdrop-filter: blur(4px);
+  animation: fadeIn 0.2s ease;
+}
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+.modal {
+  background: var(--bg); border-radius: var(--rd2);
+  max-width: 500px; width: 100%;
+  max-height: 85vh; overflow-y: auto;
+  padding: 32px; position: relative;
+  animation: slideUp 0.3s cubic-bezier(0.16,1,0.3,1);
+  box-shadow: 0 24px 80px rgba(30,14,20,0.3);
+}
+@keyframes slideUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+.modal-close {
+  position: absolute; top: 16px; right: 16px;
+  width: 32px; height: 32px;
+  background: var(--cr); border: none; border-radius: 50%;
+  font-size: 16px; cursor: pointer; color: var(--t2);
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+}
+.modal-close:hover { background: var(--rl); color: var(--r); }
+.modal-daynum { font-size: 11px; color: var(--r); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 8px; }
+.modal-title {
+  font-family: var(--font-serif); font-size: 26px; font-weight: 600;
+  color: var(--r3); line-height: 1.25; margin-bottom: 12px;
+}
+.modal-mission { background: var(--cr); border-radius: var(--rd); padding: 16px 18px; margin: 16px 0; }
+.modal-mission-label { font-size: 10px; color: var(--r); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 8px; }
+.modal-mission p { font-size: 14px; color: var(--t1); line-height: 1.65; }
+.modal-tips { margin: 16px 0; }
+.modal-tips-label { font-size: 11px; color: var(--t3); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px; }
+.modal-tip { display: flex; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--bd); font-size: 13px; color: var(--t1); line-height: 1.5; }
+.modal-tip:last-child { border-bottom: none; }
+.modal-tip-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--r); margin-top: 7px; flex-shrink: 0; }
+.modal-check-btn {
+  width: 100%; padding: 14px; border-radius: 100px;
+  border: 2px solid var(--r); background: transparent;
+  color: var(--r); font-family: var(--font-sans);
+  font-size: 14px; font-weight: 500; cursor: pointer;
+  transition: all 0.25s; margin-top: 8px; letter-spacing: 0.05em;
+}
+.modal-check-btn.done { background: var(--r); color: #fff; border-color: var(--r); }
+.modal-check-btn:hover { transform: scale(1.02); }
+
+.routine-banner {
+  background: linear-gradient(135deg, var(--rl2) 0%, var(--gl) 100%);
+  border: 1px solid rgba(201,169,110,0.3);
+  border-radius: var(--rd2); padding: 24px 28px;
+  margin-bottom: 24px; text-align: center;
+}
+.routine-banner p { font-family: var(--font-serif); font-size: 20px; font-style: italic; color: var(--r3); line-height: 1.6; }
+.routine-block { background: var(--card); border: 1px solid var(--bd); border-radius: var(--rd2); overflow: hidden; margin-bottom: 16px; }
+.routine-header {
+  display: flex; align-items: center; gap: 14px;
+  padding: 18px 22px; border-bottom: 1px solid var(--bd);
+  cursor: pointer; transition: background 0.15s; user-select: none;
+}
+.routine-header:hover { background: var(--rl2); }
+.routine-header-emoji { font-size: 24px; }
+.routine-header-text { flex: 1; }
+.routine-header-title { font-family: var(--font-serif); font-size: 17px; font-weight: 600; color: var(--r3); }
+.routine-header-sub { font-size: 12px; color: var(--t3); margin-top: 2px; }
+.routine-chevron { font-size: 14px; color: var(--t3); transition: transform 0.2s; }
+.routine-header.open .routine-chevron { transform: rotate(180deg); }
+.routine-body { padding: 0 22px; max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.35s ease; }
+.routine-body.open { max-height: 2000px; padding: 18px 22px; }
+.routine-item { display: flex; align-items: flex-start; gap: 14px; padding: 10px 0; border-bottom: 1px solid var(--bd); }
+.routine-item:last-child { border-bottom: none; }
+.routine-item-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--r); flex-shrink: 0; margin-top: 6px; }
+.routine-item-text { font-size: 13px; color: var(--t1); line-height: 1.55; }
+.routine-item-time { font-size: 11px; color: var(--t3); margin-top: 2px; }
+
+.week-grid { display: grid; gap: 10px; }
+.week-row {
+  background: var(--card); border: 1px solid var(--bd);
+  border-radius: var(--rd); padding: 14px 18px;
+  display: flex; align-items: center; gap: 16px;
+}
+.week-day { font-family: var(--font-serif); font-size: 18px; font-weight: 600; color: var(--r3); min-width: 36px; }
+.week-acts { display: flex; gap: 8px; flex-wrap: wrap; flex: 1; }
+.wact { font-size: 12px; font-weight: 500; padding: 5px 12px; border-radius: 100px; }
+
+.tips-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+.ttab {
+  padding: 8px 18px; border-radius: 100px;
+  border: 1px solid var(--bd); background: var(--card);
+  font-family: var(--font-sans); font-size: 13px;
+  color: var(--t2); cursor: pointer; transition: all 0.2s;
+}
+.ttab.on { background: var(--r); border-color: var(--r); color: #fff; box-shadow: 0 2px 12px rgba(201,96,122,0.3); }
+.tip-category { display: none; }
+.tip-category.on { display: block; animation: rise 0.3s ease; }
+.tip-section { background: var(--card); border: 1px solid var(--bd); border-radius: var(--rd2); overflow: hidden; margin-bottom: 14px; }
+.tip-sec-header {
+  display: flex; align-items: center; gap: 14px;
+  padding: 18px 22px; cursor: pointer;
+  border-bottom: 1px solid transparent;
+  transition: all 0.2s; user-select: none;
+}
+.tip-sec-header:hover { background: var(--rl2); }
+.tip-sec-header.open { border-bottom-color: var(--bd); }
+.tip-sec-emoji { font-size: 22px; }
+.tip-sec-title { flex: 1; font-family: var(--font-serif); font-size: 17px; font-weight: 600; color: var(--r3); }
+.tip-sec-chevron { font-size: 13px; color: var(--t3); transition: transform 0.2s; }
+.tip-sec-header.open .tip-sec-chevron { transform: rotate(180deg); }
+.tip-sec-body { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+.tip-sec-body.open { max-height: 3000px; }
+.tip-list { padding: 6px 22px 18px; }
+.tip-item { display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--bd); font-size: 13px; color: var(--t1); line-height: 1.6; }
+.tip-item:last-child { border-bottom: none; }
+.tip-item-star { color: var(--r); font-size: 10px; margin-top: 5px; flex-shrink: 0; }
+
+.goals-progress {
+  background: var(--card); border: 1px solid var(--bd);
+  border-radius: var(--rd2); padding: 22px 26px;
+  margin-bottom: 24px; display: flex; align-items: center; gap: 24px;
+}
+.gp-ring { position: relative; width: 80px; height: 80px; flex-shrink: 0; }
+.gp-ring svg { transform: rotate(-90deg); }
+.gp-ring circle { transition: stroke-dashoffset 0.6s ease; }
+.gp-pct {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-serif); font-size: 20px; font-weight: 600; color: var(--r);
+}
+.gp-info h3 { font-family: var(--font-serif); font-size: 20px; color: var(--r3); margin-bottom: 4px; }
+.gp-info p { font-size: 13px; color: var(--t2); line-height: 1.5; }
+
+.goal-category {
+  background: var(--card); border: 1px solid var(--bd);
+  border-radius: var(--rd2); overflow: hidden; margin-bottom: 14px;
+}
+.goal-cat-head {
+  display: flex; align-items: center; gap: 12px;
+  padding: 16px 20px; border-bottom: 1px solid var(--bd);
+  cursor: pointer; transition: background 0.15s;
+}
+.goal-cat-head:hover { background: var(--rl2); }
+.goal-cat-icon { font-size: 20px; }
+.goal-cat-name { flex: 1; font-family: var(--font-serif); font-size: 16px; font-weight: 600; color: var(--r3); }
+.goal-cat-count { font-size: 12px; color: var(--t3); }
+.goal-cat-body { padding: 8px 20px 16px; }
+.goal-item { display: flex; align-items: flex-start; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--bd); }
+.goal-item:last-child { border-bottom: none; }
+.gcheck {
+  width: 24px; height: 24px; border-radius: 50%;
+  border: 2px solid var(--bd); background: var(--card);
+  cursor: pointer; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s; font-size: 12px; color: transparent;
+}
+.gcheck.on { background: var(--r); border-color: var(--r); color: #fff; }
+.goal-text { font-size: 13px; line-height: 1.55; flex: 1; }
+.goal-sub { font-size: 11px; color: var(--t3); margin-top: 3px; }
+
+.aff-of-day {
+  background: linear-gradient(135deg, var(--r3), #4A1225);
+  border-radius: var(--rd2); padding: 32px 36px;
+  color: #fff; text-align: center; margin-bottom: 24px;
+  position: relative; overflow: hidden;
+}
+.aff-of-day::before {
+  content: '✦'; position: absolute; font-size: 120px;
+  opacity: 0.06; top: -10px; right: 20px;
+  font-family: serif; line-height: 1;
+}
+.aff-of-day-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.65; margin-bottom: 14px; }
+.aff-of-day-text {
+  font-family: var(--font-serif);
+  font-size: clamp(18px, 3vw, 26px);
+  font-style: italic; font-weight: 300;
+  color: #fff; line-height: 1.5;
+}
+.aff-of-day-btn {
+  margin-top: 20px;
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 100px; color: #fff;
+  font-family: var(--font-sans); font-size: 12px;
+  padding: 8px 20px; cursor: pointer; transition: all 0.2s;
+}
+.aff-of-day-btn:hover { background: rgba(255,255,255,0.22); }
+
+.aff-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+}
+.aff-card {
+  background: var(--card); border: 1px solid var(--bd);
+  border-radius: var(--rd); padding: 20px;
+  position: relative; overflow: hidden; transition: all 0.2s;
+}
+.aff-card:hover { border-color: var(--r); transform: translateY(-2px); box-shadow: var(--sh); }
+.aff-card::before {
+  content: '\201C'; position: absolute; top: 8px; right: 14px;
+  font-family: var(--font-serif); font-size: 60px;
+  color: var(--rl); line-height: 1;
+}
+.aff-card-num { font-size: 10px; color: var(--t3); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
+.aff-card-text { font-family: var(--font-serif); font-size: 15px; font-style: italic; color: var(--r2); line-height: 1.6; }
+
+.rom-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px; margin-top: 20px;
+}
+.rom-card {
+  background: var(--card); border: 1px solid var(--bd);
+  border-radius: var(--rd2); padding: 22px; transition: all 0.2s;
+}
+.rom-card:hover { border-color: var(--r); transform: translateY(-3px); box-shadow: var(--sh); }
+.rom-emoji { font-size: 28px; margin-bottom: 10px; }
+.rom-title { font-family: var(--font-serif); font-size: 16px; font-weight: 600; color: var(--r3); margin-bottom: 6px; }
+.rom-desc { font-size: 12px; color: var(--t2); line-height: 1.6; }
+
+.bnav {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 300;
+  background: rgba(253,249,247,0.95);
+  backdrop-filter: blur(20px);
+  border-top: 1px solid var(--bd);
+  display: flex; justify-content: center;
+  padding: 10px 8px 14px; gap: 4px;
+}
+.bnav-btn {
+  display: flex; flex-direction: column;
+  align-items: center; gap: 3px;
+  min-width: 56px; padding: 8px 10px;
+  border-radius: 14px; border: none;
+  background: transparent; cursor: pointer;
+  transition: all 0.2s; font-family: var(--font-sans);
+}
+.bnav-icon { font-size: 22px; }
+.bnav-label { font-size: 9px; color: var(--t3); letter-spacing: 0.04em; font-weight: 500; }
+.bnav-btn.on { background: var(--rl2); }
+.bnav-btn.on .bnav-label { color: var(--r); font-weight: 600; }
+
+.badge { display: inline-block; font-size: 10px; font-weight: 600; padding: 3px 10px; border-radius: 100px; letter-spacing: 0.04em; text-transform: uppercase; }
+.divider { height: 1px; background: var(--bd); margin: 20px 0; }
+.card-heading { font-family: var(--font-serif); font-size: 22px; font-weight: 600; color: var(--r3); margin-bottom: 16px; }
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-thumb { background: var(--rl); border-radius: 3px; }
+
+@media (max-width: 640px) {
+  .page-wrap { padding: 20px 16px 100px; }
+  .topbar { padding: 0 16px; }
+  .topbar-nav { display: none; }
+  .hero { padding: 28px 22px; }
+  .phases-row { grid-template-columns: 1fr 1fr; }
+  .aff-grid { grid-template-columns: 1fr; }
+  .pillar-grid { grid-template-columns: 1fr 1fr; }
+  .modal { padding: 24px 20px; }
+}
+@media (max-width: 400px) {
+  .phases-row { grid-template-columns: 1fr; }
+  .hero-stats { grid-template-columns: repeat(3,1fr); }
+}
+</style>
+</head>
+<body>
+
+<div class="ambient ambient-1"></div>
+<div class="ambient ambient-2"></div>
+<div class="ambient ambient-3"></div>
+
+<div id="splash">
+  <div class="splash-petals" id="petals"></div>
+  <div class="splash-inner">
+    <div class="splash-crown">👑</div>
+    <div class="splash-title">IT Girl<br><em>Glow Up Era</em></div>
+    <div class="splash-line"></div>
+    <div class="splash-tagline">50 dias de transformação total</div>
+    <button class="splash-cta" onclick="startApp()">
+      <span>✦</span> Começar minha era <span>✦</span>
+    </button>
+  </div>
+</div>
+
+<div id="app">
+  <header class="topbar">
+    <div class="topbar-logo">IT <span>Girl</span></div>
+    <nav class="topbar-nav" id="topnav">
+      <button class="tnav on" onclick="goto('home')">🏠 Início</button>
+      <button class="tnav" onclick="goto('dias')">📅 50 Dias</button>
+      <button class="tnav" onclick="goto('rotina')">☀️ Rotina</button>
+      <button class="tnav" onclick="goto('dicas')">💎 Dicas</button>
+      <button class="tnav" onclick="goto('metas')">🎯 Metas</button>
+      <button class="tnav" onclick="goto('aff')">🌸 Afirmações</button>
+      <button class="tnav" onclick="goto('romantico')">🌹 Romantizar</button>
+    </nav>
+    <div class="topbar-progress">
+      <div class="tp-ring">
+        <svg width="36" height="36" viewBox="0 0 36 36">
+          <circle cx="18" cy="18" r="15" fill="none" stroke="#F7E0E6" stroke-width="3"/>
+          <circle cx="18" cy="18" r="15" fill="none" stroke="#C9607A" stroke-width="3"
+            stroke-dasharray="94.2" id="tp-circle" stroke-dashoffset="94.2" stroke-linecap="round"/>
+        </svg>
+        <div class="tp-pct" id="tp-pct">0%</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="page-wrap">
+    <!-- HOME -->
+    <div class="sec on" id="s-home">
+      <div class="hero">
+        <div class="hero-deco">✦</div>
+        <div class="hero-tag">✦ Sua jornada de transformação</div>
+        <h1>Bem-vinda à sua<br><em>era mais poderosa</em></h1>
+        <p class="hero-sub">50 dias de transformação completa — corpo, mente, alma, beleza, criatividade e amor próprio. A versão mais diva e radiante de você está chegando.</p>
+        <div class="hero-prog-wrap">
+          <div class="hero-prog-fill" id="h-bar" style="width:0%"></div>
+        </div>
+        <div class="hero-prog-label">
+          <span id="h-label">0 de 50 dias</span>
+          <span id="h-pct-txt">0% concluído</span>
+        </div>
+        <div class="hero-stats">
+          <div class="hstat"><div class="hstat-n" id="h-done">0</div><div class="hstat-l">dias feitos</div></div>
+          <div class="hstat"><div class="hstat-n" id="h-left">50</div><div class="hstat-l">restantes</div></div>
+          <div class="hstat"><div class="hstat-n" id="h-streak">0</div><div class="hstat-l">sequência</div></div>
+        </div>
+      </div>
+      <div id="next-area"></div>
+      <div class="quote">
+        <p>"A vida é um romance que você escreve com intenção, beleza e amor próprio. Cada manhã é um novo capítulo."</p>
+      </div>
+      <div class="card-heading">Os 7 pilares da IT Girl ✦</div>
+      <div class="pillar-grid" id="pillar-grid"></div>
+      <div class="card-heading">As 4 fases da jornada</div>
+      <div class="phases-row" id="phases-row"></div>
+    </div>
+
+    <!-- DIAS -->
+    <div class="sec" id="s-dias">
+      <div class="sec-head">
+        <h2>Os 50 dias 📅</h2>
+        <p>Clique em cada dia para ver a missão e marcar como concluído. Sua jornada é registrada automaticamente.</p>
+      </div>
+      <div id="days-area"></div>
+    </div>
+
+    <!-- ROTINA -->
+    <div class="sec" id="s-rotina">
+      <div class="sec-head">
+        <h2>Rotina diária ☀️</h2>
+        <p>O ritual que transforma uma pessoa comum na IT Girl mais diva e poderosa do mundo.</p>
+      </div>
+      <div class="routine-banner">
+        <p>"Uma rainha não tem dias ruins — ela tem dias de aprendizado e dias de triunfo."</p>
+      </div>
+      <div id="routine-area"></div>
+      <div style="margin-top:28px">
+        <div class="card-heading">Programação semanal</div>
+        <div class="week-grid" id="week-grid"></div>
+      </div>
+    </div>
+
+    <!-- DICAS -->
+    <div class="sec" id="s-dicas">
+      <div class="sec-head">
+        <h2>Guia completo de dicas 💎</h2>
+        <p>Tudo que você precisa saber para arrasar em cada área da sua transformação. Clique em cada tópico.</p>
+      </div>
+      <div class="tips-tabs" id="tips-tabs"></div>
+      <div id="tips-area"></div>
+    </div>
+
+    <!-- METAS -->
+    <div class="sec" id="s-metas">
+      <div class="sec-head">
+        <h2>Metas dos 50 dias 🎯</h2>
+        <p>Marque cada meta conforme você conquista. Você pode absolutamente fazer tudo isso.</p>
+      </div>
+      <div class="goals-progress">
+        <div class="gp-ring">
+          <svg width="80" height="80" viewBox="0 0 80 80">
+            <circle cx="40" cy="40" r="34" fill="none" stroke="#F7E0E6" stroke-width="6"/>
+            <circle cx="40" cy="40" r="34" fill="none" stroke="#C9607A" stroke-width="6"
+              stroke-dasharray="213.6" id="gp-circle" stroke-dashoffset="213.6" stroke-linecap="round"/>
+          </svg>
+          <div class="gp-pct" id="gp-pct">0%</div>
+        </div>
+        <div class="gp-info">
+          <h3 id="gp-title">Suas metas esperam por você</h3>
+          <p id="gp-sub">Marque cada conquista à medida que acontece. Celebre cada uma!</p>
+        </div>
+      </div>
+      <div id="goals-area"></div>
+    </div>
+
+    <!-- AFIRMAÇÕES -->
+    <div class="sec" id="s-aff">
+      <div class="sec-head">
+        <h2>Afirmações de IT Girl 🌸</h2>
+        <p>Repita em voz alta toda manhã. O que você diz para si mesma molda quem você se torna.</p>
+      </div>
+      <div class="aff-of-day">
+        <div class="aff-of-day-label">✦ Afirmação do dia</div>
+        <div class="aff-of-day-text" id="aff-today"></div>
+        <button class="aff-of-day-btn" onclick="nextAff()">✦ Nova afirmação</button>
+      </div>
+      <div class="card-heading">Todas as afirmações</div>
+      <div class="aff-grid" id="aff-grid"></div>
+    </div>
+
+    <!-- ROMANTIZAR -->
+    <div class="sec" id="s-romantico">
+      <div class="sec-head">
+        <h2>Romantizar a vida 🌹</h2>
+        <p>A arte de transformar o cotidiano em poesia. Pequenos atos que mudam tudo.</p>
+      </div>
+      <div class="quote">
+        <p>"Romantizar a vida não é fingir que ela é perfeita — é escolher enxergar a beleza que já existe nela."</p>
+      </div>
+      <div id="rom-area"></div>
+    </div>
+  </div>
+
+  <nav class="bnav">
+    <button class="bnav-btn on" onclick="goto('home')"><span class="bnav-icon">🏠</span><span class="bnav-label">Início</span></button>
+    <button class="bnav-btn" onclick="goto('dias')"><span class="bnav-icon">📅</span><span class="bnav-label">Dias</span></button>
+    <button class="bnav-btn" onclick="goto('rotina')"><span class="bnav-icon">☀️</span><span class="bnav-label">Rotina</span></button>
+    <button class="bnav-btn" onclick="goto('dicas')"><span class="bnav-icon">💎</span><span class="bnav-label">Dicas</span></button>
+    <button class="bnav-btn" onclick="goto('metas')"><span class="bnav-icon">🎯</span><span class="bnav-label">Metas</span></button>
+    <button class="bnav-btn" onclick="goto('aff')"><span class="bnav-icon">🌸</span><span class="bnav-label">Afirma</span></button>
+    <button class="bnav-btn" onclick="goto('romantico')"><span class="bnav-icon">🌹</span><span class="bnav-label">Amor</span></button>
+  </nav>
+</div>
+
+<script>
+/* ═══════════════════════════════════════════════
+   DATA
+═══════════════════════════════════════════════ */
+const DAYS = [
+  // FASE 1 — Despertar (Dias 1-12)
+  {n:1,f:"Escreva seu manifesto pessoal",tag:"Início",c:"r",
+   act:"Escreva em detalhes: quem você quer ser no dia 50? Como quer se sentir, como quer se ver, o que quer ter conquistado? Sem filtro, sem limites. Cole no espelho.",
+   tips:["Use 2 páginas do seu diário — não economize","Escreva no presente: 'Eu sou...', não 'Eu quero...'","Leia toda manhã ao acordar durante os 50 dias","Inclua corpo, mente, alma, beleza e sonhos"]},
+  {n:2,f:"Monte seu kit de skincare",tag:"Beleza",c:"pink",
+   act:"Pesquise e compre: limpador facial, tônico, hidratante e FPS 50+. Esse é o mínimo sagrado para começar.",
+   tips:["Comece simples: 4 produtos são suficientes no início","FPS é obrigatório: sem FPS não há glow","Consulte uma dermatologista se tiver acne ou dúvidas","Separe sua prateleira bonita — o ritual começa no visual"]},
+  {n:3,f:"1° treino — bem-vinda ao movimento",tag:"Corpo",c:"coral",
+   act:"30 minutos de qualquer atividade: caminhada, vídeo no YouTube, agachamentos em casa. O que importa é dar o primeiro passo.",
+   tips:["Não existe treino perfeito — existe o treino que você FEZ","Coloque uma música que te faz sentir poderosa","Anote no diário: como seu corpo se sentiu","Tire uma foto antes do primeiro treino — guarde para o dia 50"]},
+  {n:4,f:"Journaling profundo",tag:"Mente",c:"purple",
+   act:"Escreva: 5 coisas que você ama em si mesma + 5 que quer desenvolver + 3 medos que quer superar. Guarde para reler no dia 50.",
+   tips:["Escreva sem julgar — este caderno é só seu","Seja específica: não 'ser mais confiante', mas 'falar em público sem tremer'","Timer de 20 min: escreva sem parar até o tempo acabar","Isso é seu ponto de partida — é precioso"]},
+  {n:5,f:"Leia a Bíblia — início da jornada espiritual",tag:"Espírito",c:"gold",
+   act:"Leia Provérbios 1. Anote 1 versículo que tocou seu coração e escreva por que ele te tocou. Comece sua jornada espiritual.",
+   tips:["Crie um caderno só para suas anotações bíblicas","Anote data, livro, capítulo e versículo","Leia sempre no mesmo horário: cria o hábito automaticamente","O YouVersion tem planos de leitura bíblica gratuitos"]},
+  {n:6,f:"Yoga matinal — 1ª vez",tag:"Corpo",c:"coral",
+   act:"20 minutos de saudação ao sol. Use YouTube: 'Yoga para iniciantes manhã'. Não precisa ser perfeito — apenas respire.",
+   tips:["Faça em jejum se possível: clareza mental imediata","Tapete limpo, roupa confortável, janela aberta","Não compare com quem é flexível há anos — você está começando","A saudação ao sol é a sequência mais completa para iniciantes"]},
+  {n:7,f:"Romantizar: café especial",tag:"Vida",c:"pink",
+   act:"Prepare seu café na xícara mais bonita que tiver. Coloque uma fruta, uma florzinha ou folhinha ao lado. Fotografe. Contemple. Seja a protagonista.",
+   tips:["Não precisa ser caro: a beleza está na atenção","Coma devagar, sem telas — saboreie","Coloque música suave — cria a atmosfera de filme","Isso treina seu cérebro a ver beleza no cotidiano"]},
+  {n:8,f:"Skincare noturno — dupla limpeza",tag:"Beleza",c:"pink",
+   act:"Aprenda a rotina: demaquilante + limpador + tônico + hidratante noturno. O ritual da noite é mais importante que o da manhã.",
+   tips:["Pele descansa e regenera à noite — ajude-a","Nunca durma de maquiagem — isso é regra de IT Girl","Massageie o rosto ao aplicar: estimula circulação","Coloque uma vela acesa durante o ritual — transforma tudo"]},
+  {n:9,f:"Leitura: 30 páginas de um livro inspirador",tag:"Mente",c:"purple",
+   act:"Comece 'O Poder do Agora', 'Mulheres que correm com os lobos' ou qualquer livro que te chame. 30 páginas por dia, sem desculpa.",
+   tips:["Se não gostou do livro, troque — sem culpa","Leia no papel se possível: descanse os olhos","Sublinhe frases que tocam seu coração","Crie uma lista dos 10 livros que quer ler nesses 50 dias"]},
+  {n:10,f:"Organize seu guarda-roupa",tag:"Estilo",c:"gold",
+   act:"Tire tudo do armário. Separe em: amo / talvez / doar. O que não te faz sentir incrível quando veste, não merece espaço.",
+   tips:["Fotografe os looks que funcionam — crie um 'lookbook'","Doe com gratidão: essa roupa vai fazer outra pessoa feliz","Organize por cor: visual limpo = mente limpa","Identifique o que falta: peças-chave que completam tudo"]},
+  {n:11,f:"Caminhada ao ar livre — 40 min",tag:"Corpo",c:"coral",
+   act:"Vista roupa bonita, coloque fone, caminhe rápido por 40 minutos. Absorva o sol, sinta o vento. Seu corpo merece esse movimento.",
+   tips:["Caminhar é o exercício mais subestimado que existe","Vá em horários com sol: vitamina D é essencial","Use tênis confortável — cuide dos seus pés","Faça disso um compromisso: marque na agenda como reunião"]},
+  {n:12,f:"Meditação guiada — 15 min",tag:"Mente",c:"purple",
+   act:"Use Insight Timer ou YouTube: 'Meditação para autoconfiança'. Sente-se confortável, feche os olhos, apenas permita.",
+   tips:["Não existe meditar errado — se você sentou, já meditou","Comece com 5 min se 15 parecer demais","Sempre no mesmo horário: seu cérebro agradece","Meditar é como academia pro cérebro: os resultados vêm com o tempo"]},
+  // FASE 2 — Elevação (Dias 13-25)
+  {n:13,f:"Monte seu mood board dos sonhos",tag:"Visão",c:"pink",
+   act:"Pinterest ou papel: cole imagens da mulher que você está se tornando. Corpo, estilo, casa, viagens, energia. Olhe todo dia.",
+   tips:["Inclua imagens que geram SENTIMENTO, não só estética","Cole no espelho ou use como wallpaper do celular","Atualize semanalmente: sua visão evolui com você","Isso é neurociência: visualização ativa as mesmas áreas do cérebro"]},
+  {n:14,f:"Treino HIIT — 25 min",tag:"Corpo",c:"coral",
+   act:"YouTube: 'HIIT para iniciantes 25 min'. Intervalos de alta intensidade queimam gordura e liberam endorfina. Você consegue!",
+   tips:["Aqueça 3 min antes e alongue 3 min depois","Se não aguentar, reduza o ritmo — mas não pare","Hidrate-se antes, durante e depois","Esse treino acelera metabolismo por até 24h depois"]},
+  {n:15,f:"Carta de amor próprio",tag:"Mente",c:"purple",
+   act:"Escreva uma carta para si mesma como se fosse sua melhor amiga. Diga tudo que admira, o que superou, por que é incrível.",
+   tips:["Não tenha vergonha — ninguém vai ler","Leia em voz alta: o impacto é 10x maior","Guarde para reler nos dias difíceis","Termine com: 'Eu tenho orgulho de quem estou me tornando'"]},
+  {n:16,f:"Skincare: máscara facial + esfoliação",tag:"Beleza",c:"pink",
+   act:"Esfolie suavemente, aplique uma máscara (argila, hidratante ou sheet mask). 20 min de autocuidado puro.",
+   tips:["Esfolie no máximo 2x por semana — não agrida a pele","Máscara de argila: oleosidade. Sheet mask: hidratação","Enquanto a máscara age, tome um chá e coloque música","Tire selfie antes e depois — você vai ver a diferença"]},
+  {n:17,f:"Aprenda a fazer um prato saudável e bonito",tag:"Saúde",c:"coral",
+   act:"Pesquise no Pinterest uma receita saudável e visualmente linda. Prepare com carinho, monte no prato como se fosse restaurante.",
+   tips:["Comida bonita = comida que nutre mais (comprovado!)","Use ervas frescas: salsinha, manjericão, cebolinha","Fotografe: comece seu álbum de 'pratos de rainha'","Cozinhar é meditação ativa — esteja presente"]},
+  {n:18,f:"Defina suas 3 metas dos 50 dias",tag:"Foco",c:"gold",
+   act:"Escolha 3 metas CLARAS e MENSURÁVEIS para alcançar até o dia 50. Escreva com data, medida e ação diária.",
+   tips:["Use SMART: Específica, Mensurável, Alcançável, Relevante, Temporal","Exemplo: 'Perder 3kg até o dia 50 treinando 5x/semana'","Cole num lugar visível — revisão diária é obrigatória","Não mais que 3: foco é poder"]},
+  {n:19,f:"Skincare: pesquise sobre ácidos",tag:"Beleza",c:"pink",
+   act:"Estude: ácido hialurônico (hidrata), vitamina C (ilumina), niacinamida (poros). Escolha 1 para incluir na rotina.",
+   tips:["Não misture ácidos sem pesquisar — pode irritar","Vitamina C = de manhã. Retinol = à noite","Comece com concentrações baixas: pele precisa se adaptar","Uma dermatologista pode montar SEU protocolo ideal"]},
+  {n:20,f:"Gratidão profunda — 50 itens",tag:"Mente",c:"purple",
+   act:"Liste 50 coisas pelas quais é grata. Sim, 50. Desde 'estou viva' até 'meu café da manhã foi delicioso'. Gratidão muda tudo.",
+   tips:["Os primeiros 20 são fáceis — nos outros 30 está a transformação","Inclua detalhes pequenos: 'o sorriso daquela estranha'","Releia quando estiver triste: é remédio instantâneo","Faça isso uma vez por semana: cria mentalidade de abundância"]},
+  {n:21,f:"Treino de glúteos e pernas",tag:"Corpo",c:"coral",
+   act:"YouTube: 'Treino glúteos e pernas em casa 30 min'. Agachamento, afundo, elevação pélvica. Sinta cada músculo.",
+   tips:["Mente-músculo: pense no músculo que está trabalhando","Não tenha medo de peso: músculos torneiam o corpo","Se não tem peso, use garrafas de água ou mochilas","Alongue depois: músculos flexíveis são músculos bonitos"]},
+  {n:22,f:"Banho spa em casa",tag:"Ritual",c:"pink",
+   act:"Velas, música, sais de banho ou óleo essencial. Esfolie o corpo inteiro, hidrate depois. Transforme seu banheiro em spa 5 estrelas.",
+   tips:["Esfoliante caseiro: açúcar + óleo de coco + café","Hidrate o corpo inteiro AINDA no banheiro, com a pele úmida","Escova de cabelo com óleo nas pontas: nutrição express","Este ritual deve acontecer pelo menos 1x por semana"]},
+  {n:23,f:"Digital detox — 24h sem redes sociais",tag:"Mente",c:"purple",
+   act:"Desative notificações, silencie grupos. 24 horas sem Instagram, TikTok ou Twitter. Leia, caminhe, cozinhe, exista.",
+   tips:["Avise suas amigas para não se preocuparem","Use o tempo livre para algo que sempre quis fazer","Perceba: quanto do seu dia era gasto scrollando?","Se 24h parece impossível, comece com 12h — e suba"]},
+  {n:24,f:"Encontre seu estilo pessoal",tag:"Estilo",c:"gold",
+   act:"Pesquise no Pinterest: 'aesthetic outfits'. Salve 30 looks. Identifique padrões: cores, peças, vibe. Isso é SEU estilo.",
+   tips:["Não copie — se inspire. Seu estilo é único","Monte 5 looks com o que já tem no armário","Peças-chave: blazer, jeans bom, vestido atemporal, tênis branco","Estilo é como você se sente, não o que os outros veem"]},
+  {n:25,f:"Aprenda algo novo — 1 hora",tag:"Mente",c:"purple",
+   act:"YouTube, curso online, tutorial. Aprenda sobre investimentos, culinária, fotografia, idiomas — o que fizer seus olhos brilharem.",
+   tips:["Skillshare e Coursera têm cursos gratuitos incríveis","Aprender mantém o cérebro jovem — é skincare cerebral","Não precisa dominar: o objetivo é COMEÇAR","Uma IT Girl é curiosa: nunca para de aprender"]},
+  // FASE 3 — Transformação (Dias 26-38)
+  {n:26,f:"Rotina matinal perfeita: pratique",tag:"Rotina",c:"coral",
+   act:"Acorde 1h mais cedo. Água + skincare + journaling + exercício + café bonito. A manhã define seu dia inteiro.",
+   tips:["Durma cedo na noite anterior — manhã produtiva começa à noite","Não toque no celular nos primeiros 30 min","Tenha tudo pronto na noite anterior: roupa, café, agenda","Em 21 dias isso se torna automático"]},
+  {n:27,f:"Hair care day: cuide dos cabelos",tag:"Beleza",c:"pink",
+   act:"Máscara capilar profunda, óleo nas pontas, protetor térmico. Se der, vá ao salão cortar pontas duplas.",
+   tips:["Cabelo hidratado = cabelo brilhante = IT Girl energy","Corte as pontas a cada 3 meses: cresce mais saudável","Protetor térmico SEMPRE antes de chapinha ou secador","Fronha de seda: reduz frizz e quebra enquanto dorme"]},
+  {n:28,f:"Planejamento financeiro",tag:"Vida",c:"gold",
+   act:"Anote todas as suas receitas e despesas do mês. Crie categorias. Identifique onde está gastando demais. IT Girl é rica e sábia.",
+   tips:["Use o app Mobills ou uma planilha simples","Regra 50/30/20: necessidades/desejos/investimentos","Comece a poupar nem que seja R$10: o hábito é o que importa","Mulher financeiramente independente = mulher livre"]},
+  {n:29,f:"Treino funcional + core",tag:"Corpo",c:"coral",
+   act:"30 minutos de treino funcional focando abdômen, costas e postura. Prancha, bicicleta no ar, superman.",
+   tips:["Core forte = postura de rainha = confiança natural","Prancha: comece com 20s e aumente 5s por dia","Não faça abdominais tradicionais — funcionais são melhores","Respire durante os exercícios: nunca prenda o ar"]},
+  {n:30,f:"Metade da jornada — reflexão profunda",tag:"Marco",c:"gold",
+   act:"Você está na METADE! Releia o manifesto do dia 1. O que mudou? O que você conquistou? Escreva uma carta de progresso.",
+   tips:["Compare fotos do dia 1 com hoje — celebre cada mudança","Liste 10 coisas que mudaram desde o dia 1","Ajuste suas metas se necessário — você cresceu","Compartilhe com alguém de confiança: celebrar junto é poderoso"]},
+  {n:31,f:"Crie sua playlist de empoderamento",tag:"Energia",c:"pink",
+   act:"50 músicas que te fazem sentir invencível. Para treinar, para se arrumar, para caminhar. Sua trilha sonora de IT Girl.",
+   tips:["Inclua músicas em vários idiomas — amplie horizontes","Dua Lipa, Beyoncé, Anitta, Rosalía — queens que inspiram","Ouça TODA manhã enquanto se arruma: muda a energia do dia","Crie playlists por momento: treino, rotina, relax, foco"]},
+  {n:32,f:"Pratique postura e linguagem corporal",tag:"Presença",c:"coral",
+   act:"Assista vídeos sobre postura e linguagem corporal de confiança. Pratique: ombros abertos, queixo paralelo, passos firmes.",
+   tips:["Postura muda como os outros te percebem IMEDIATAMENTE","Pratique 'power pose' 2 min antes de situações importantes","Ombros para trás = peito aberto = respiração melhor = mais energia","Filme-se caminhando e corrija: você vai se surpreender"]},
+  {n:33,f:"Culinária: batch cooking saudável",tag:"Saúde",c:"coral",
+   act:"Prepare refeições saudáveis para 3 dias. Arroz integral, frango, legumes assados, salada. Organize em potinhos bonitos.",
+   tips:["Domingo de batch cooking = semana de IT Girl que se alimenta bem","Congele porções: praticidade sem abrir mão da saúde","Temperos naturais: alho, cúrcuma, gengibre, limão","Potes de vidro: mais bonitos, mais saudáveis, mais IT Girl"]},
+  {n:34,f:"Cuide das suas unhas",tag:"Beleza",c:"pink",
+   act:"Lixe, hidrate cutículas, aplique base fortalecedora ou esmalte bonito. Mãos cuidadas são cartão de visita.",
+   tips:["Óleo de rosa mosqueta nas cutículas toda noite","Unha nude ou rosé: elegância atemporal","Mãos hidratadas envelhecem mais devagar","Se puder, faça as unhas profissionalmente 1x por mês"]},
+  {n:35,f:"Estude sobre etiqueta e elegância",tag:"Presença",c:"gold",
+   act:"Assista vídeos sobre etiqueta moderna, como se portar em diferentes ambientes, como falar com elegância.",
+   tips:["Elegância não é rigidez — é graça e naturalidade","Ouça mais do que fala: isso é sofisticação","Aprenda a comer diferentes pratos: sushi, lagosta, fondue","Gentleman's Guide e School of Affluence são ótimos canais"]},
+  {n:36,f:"Fotos profissionais de si mesma",tag:"Autoestima",c:"pink",
+   act:"Vista sua melhor roupa, arrume-se como se fosse para uma sessão de fotos. Use timer do celular. Tire 100 fotos. Ame-se.",
+   tips:["Luz natural é sua melhor amiga: fotografe perto de janelas","Sorria de verdade: pense em algo que te faz feliz","Experimente ângulos diferentes: de cima, de lado, de frente","Escolha 5 favoritas e imprima: celebre sua beleza"]},
+  {n:37,f:"Oração e gratidão espiritual",tag:"Espírito",c:"gold",
+   act:"Reserve 30 minutos para oração profunda. Agradeça por cada bênção, peça sabedoria, entregue suas preocupações.",
+   tips:["Encontre um lugar silencioso e confortável","Escreva suas orações: isso aprofunda a conexão","Inclua gratidão: comece por agradecer antes de pedir","A paz que vem da oração não tem preço"]},
+  {n:38,f:"Reavalie e ajuste o plano",tag:"Foco",c:"purple",
+   act:"Reveja suas 3 metas do dia 18. Onde está? O que falta? Ajuste prazos e ações se necessário. Faltam 12 dias!",
+   tips:["Não se culpe pelo que não fez — foque no que AINDA pode fazer","12 dias de foco total mudam MUITO","Aumente a intensidade: agora é hora de acelerar","Escreva as ações diárias até o dia 50"]},
+  // FASE 4 — Brilhar (Dias 39-50)
+  {n:39,f:"Treino completo: full body",tag:"Corpo",c:"coral",
+   act:"45 minutos de treino completo: aquecimento + superiores + inferiores + core + alongamento. Dê tudo de si.",
+   tips:["Você é mais forte do que era no dia 1 — prove isso","Aumente a carga ou repetições em relação ao início","Hidrate-se: 500ml antes, durante e depois","Esse é o corpo que te carrega — honre-o"]},
+  {n:40,f:"Crie seu brand pessoal",tag:"Presença",c:"gold",
+   act:"Como você quer ser lembrada? Defina: sua energia, seu estilo visual, suas 3 palavras-chave. Alinhe redes sociais.",
+   tips:["Consistência visual: paleta de cores, filtros, vibe","Bio clara: quem você é e o que te move","Conteúdo que agrega valor: dicas, inspiração, vulnerabilidade","Sua marca pessoal é sua reputação intencional"]},
+  {n:41,f:"Faça algo que te assusta",tag:"Coragem",c:"purple",
+   act:"Fale com aquela pessoa, faça aquela ligação, publique aquele post, vá àquele lugar. O medo é o portal para o crescimento.",
+   tips:["A coragem não é ausência do medo — é agir APESAR dele","Comece pequeno: mande a mensagem, depois a ligação","Celebre cada ato de coragem, por menor que seja","Anote: 'Hoje fiz algo que me assustava e sobrevivi'"]},
+  {n:42,f:"Day spa completo em casa",tag:"Ritual",c:"pink",
+   act:"O spa mais completo: esfoliação corporal + banho demorado + máscara facial + máscara capilar + hidratação total + unhas + chá.",
+   tips:["Reserve 2-3 horas: isso não é preguiça, é investimento","Monte a playlist: lo-fi, jazz ou sons da natureza","Acenda velas, use óleos essenciais, feche a porta","Depois: pijama limpo, lençol cheiroso, filme favorito"]},
+  {n:43,f:"Monte outfits para a semana",tag:"Estilo",c:"gold",
+   act:"Planeje 7 looks completos para a semana: roupa + acessórios + sapato. Fotografe cada um. Nunca mais 'não tenho o que vestir'.",
+   tips:["Mix & match: combine peças de formas diferentes","Acessórios transformam: brinco, colar, lenço, cinto","Tenha 1 look 'poder': aquele que te faz se sentir invencível","Prepare na noite anterior: manhã sem estresse"]},
+  {n:44,f:"Journaling: carta para seu eu futuro",tag:"Mente",c:"purple",
+   act:"Escreva para você daqui a 1 ano. O que conquistou, como se sente, onde mora, como é sua vida. Detalhes.",
+   tips:["Escreva como se JÁ tivesse acontecido: 'Eu conquistei...'","Inclua emoções: 'Eu me sinto tão orgulhosa porque...'","Sele num envelope com data para abrir","Isso programa seu subconsciente para buscar essa realidade"]},
+  {n:45,f:"Ato de gentileza — espalhe amor",tag:"Alma",c:"gold",
+   act:"Faça 3 atos de gentileza hoje: elogie uma estranha, pague o café de alguém, mande mensagem de amor para quem precisa.",
+   tips:["Gentileza gera gentileza: você muda a corrente","Elogie mulheres: somos mais fortes juntas","Um bilhete escrito à mão tem poder absurdo","Ser gentil não te diminui — te eleva"]},
+  {n:46,f:"Masterclass: sua melhor maquiagem",tag:"Beleza",c:"pink",
+   act:"Assista tutoriais e pratique sua maquiagem ideal: base, olhos, lábios. Descubra o que realça SEUS traços. Menos é mais.",
+   tips:["Pele bem cuidada = base leve = glow natural","Sobrancelhas feitas mudam TODO o rosto","Encontre SEU batom: aquele que te faz sentir poderosa","Maquiagem é arte e expressão — divirta-se"]},
+  {n:47,f:"Organize sua vida digital",tag:"Ordem",c:"purple",
+   act:"Limpe fotos, organize pastas, cancele inscrições inúteis, organize e-mail, atualize senhas. Vida digital limpa = mente limpa.",
+   tips:["Exclua apps que não usa: libere espaço (físico e mental)","Organize fotos em álbuns: memórias merecem cuidado","Cancele newsletters que não lê: seu inbox agradece","Backup na nuvem: nunca perca suas memórias"]},
+  {n:48,f:"Treino final: bata seu recorde",tag:"Corpo",c:"coral",
+   act:"Repita o treino que achou mais difícil. Veja como está mais forte, mais resistente, mais capaz. Você EVOLUIU.",
+   tips:["Compare com o dia 1: a evolução vai te emocionar","Dê tudo de si: essa é sua reta final","Celebre cada repetição: seu corpo é incrível","Tire a foto 'depois' — compare com a do dia 3"]},
+  {n:49,f:"Reflexão dos 50 dias",tag:"Marco",c:"gold",
+   act:"Releia TUDO: manifesto, cartas, listas de gratidão, metas. Compare fotos. Escreva: o que aprendi, o que conquistei, quem me tornei.",
+   tips:["Chore se precisar — são lágrimas de orgulho","Liste TUDO que mudou: hábitos, pele, corpo, mente, alma","Compartilhe com alguém: sua história inspira","Você fez o que muitas pessoas sonham em fazer"]},
+  {n:50,f:"Celebração: você é a IT Girl",tag:"Celebrar",c:"gold",
+   act:"Vista sua melhor roupa. Arrume-se como nunca. Saia, se permita, celebre. Você completou 50 dias de transformação total. Você é INCRÍVEL.",
+   tips:["Tire a foto mais linda da sua vida — você merece","Escreva: 'Eu sou a mulher que decidi ser'","Comemore: jantar especial, presente para si mesma","Isso não é o fim — é o começo da sua melhor era"]}
+];
+
+const PILLARS = [
+  {icon:"💪",name:"Corpo & Saúde",desc:"Treinos, alimentação saudável e energia vital."},
+  {icon:"🧠",name:"Mente & Foco",desc:"Journaling, meditação, aprendizado constante."},
+  {icon:"✨",name:"Beleza & Skincare",desc:"Cuidados com pele, cabelo, unhas e glow."},
+  {icon:"👗",name:"Estilo & Presença",desc:"Moda, postura, linguagem corporal, elegância."},
+  {icon:"📖",name:"Espírito & Fé",desc:"Oração, leitura bíblica, gratidão e paz interior."},
+  {icon:"🎨",name:"Criatividade",desc:"Música, arte, culinária, expressão pessoal."},
+  {icon:"🌹",name:"Amor Próprio",desc:"Autoestima, limites, celebração de quem você é."}
+];
+
+const PHASES = [
+  {cls:"p1",days:"Dias 1–12",name:"Despertar",desc:"Primeiros passos, fundações e novos hábitos."},
+  {cls:"p2",days:"Dias 13–25",name:"Elevação",desc:"Intensificação, novas habilidades, expansão."},
+  {cls:"p3",days:"Dias 26–38",name:"Transformação",desc:"Resultados visíveis, ajustes e poder."},
+  {cls:"p4",days:"Dias 39–50",name:"Brilhar",desc:"Celebração, consolidação e sua melhor versão."}
+];
+
+const ROUTINES = [
+  {emoji:"🌅",title:"Rotina Matinal",sub:"5:30 – 8:00",items:[
+    {t:"Acordar e agradecer — 3 coisas antes de abrir os olhos",time:"5:30"},
+    {t:"Copo de água com limão em jejum",time:"5:35"},
+    {t:"Skincare matinal: limpeza + tônico + vitamina C + hidratante + FPS",time:"5:40"},
+    {t:"Journaling: 1 página de intenções para o dia",time:"5:55"},
+    {t:"Exercício: yoga, treino ou caminhada (30–45 min)",time:"6:10"},
+    {t:"Banho + skincare corporal",time:"7:00"},
+    {t:"Café da manhã bonito e nutritivo",time:"7:20"},
+    {t:"Se arrumar com intenção: look do dia, maquiagem leve, perfume",time:"7:40"}
+  ]},
+  {emoji:"☀️",title:"Rotina da Tarde",sub:"12:00 – 18:00",items:[
+    {t:"Almoço saudável e bonito — coma sem telas",time:"12:00"},
+    {t:"Reaplicar FPS (obrigatório!)",time:"13:00"},
+    {t:"Leitura: pelo menos 20 páginas",time:"14:00"},
+    {t:"Estudar algo novo: curso, idioma, habilidade",time:"15:00"},
+    {t:"Lanche da tarde: frutas, nuts, chá",time:"16:00"},
+    {t:"Organizar agenda do dia seguinte",time:"17:00"}
+  ]},
+  {emoji:"🌙",title:"Rotina Noturna",sub:"19:00 – 22:00",items:[
+    {t:"Jantar leve e saudável",time:"19:00"},
+    {t:"Tempo livre: filme, série, hobby criativo",time:"19:45"},
+    {t:"Preparar roupa e bolsa do dia seguinte",time:"20:30"},
+    {t:"Skincare noturno: dupla limpeza + tônico + sérum + hidratante",time:"21:00"},
+    {t:"Journaling noturno: gratidão + reflexão do dia",time:"21:20"},
+    {t:"Leitura bíblica ou meditação guiada",time:"21:40"},
+    {t:"Dormir: 7-8 horas são não-negociáveis",time:"22:00"}
+  ]},
+  {emoji:"💆",title:"Ritual Semanal (Domingo)",sub:"O dia do reset",items:[
+    {t:"Skincare intensiva: esfoliação + máscara facial",time:"Manhã"},
+    {t:"Hair care: máscara capilar profunda",time:"Manhã"},
+    {t:"Banho spa: esfoliação corporal + hidratação total",time:"Tarde"},
+    {t:"Unhas: lixar, hidratar cutículas, esmalte",time:"Tarde"},
+    {t:"Batch cooking: preparar refeições da semana",time:"Tarde"},
+    {t:"Planejamento semanal: metas, agenda, prioridades",time:"Noite"},
+    {t:"Arrumar o quarto e organizar a semana",time:"Noite"}
+  ]}
+];
+
+const WEEK = [
+  {day:"Seg",acts:[
+    {t:"Treino HIIT",bg:"#FDE8ED",cl:"#C9607A"},
+    {t:"Leitura",bg:"#EDE5F5",cl:"#9B7BB5"},
+    {t:"Skincare AM/PM",bg:"#DFF0ED",cl:"#5A9E8F"}
+  ]},
+  {day:"Ter",acts:[
+    {t:"Yoga",bg:"#FDE8ED",cl:"#C9607A"},
+    {t:"Estudar",bg:"#FAF0DA",cl:"#C9883A"},
+    {t:"Journaling",bg:"#EDE5F5",cl:"#9B7BB5"}
+  ]},
+  {day:"Qua",acts:[
+    {t:"Treino Força",bg:"#FDE8ED",cl:"#C9607A"},
+    {t:"Leitura",bg:"#EDE5F5",cl:"#9B7BB5"},
+    {t:"Cozinhar",bg:"#DFF0ED",cl:"#5A9E8F"}
+  ]},
+  {day:"Qui",acts:[
+    {t:"Caminhada",bg:"#FDE8ED",cl:"#C9607A"},
+    {t:"Curso online",bg:"#FAF0DA",cl:"#C9883A"},
+    {t:"Meditação",bg:"#EDE5F5",cl:"#9B7BB5"}
+  ]},
+  {day:"Sex",acts:[
+    {t:"Treino HIIT",bg:"#FDE8ED",cl:"#C9607A"},
+    {t:"Leitura",bg:"#EDE5F5",cl:"#9B7BB5"},
+    {t:"Self-care",bg:"#DFF0ED",cl:"#5A9E8F"}
+  ]},
+  {day:"Sáb",acts:[
+    {t:"Yoga + Caminhada",bg:"#FDE8ED",cl:"#C9607A"},
+    {t:"Hobby criativo",bg:"#FAF0DA",cl:"#C9883A"},
+    {t:"Social",bg:"#DFF0ED",cl:"#5A9E8F"}
+  ]},
+  {day:"Dom",acts:[
+    {t:"Descanso ativo",bg:"#FDE8ED",cl:"#C9607A"},
+    {t:"Batch cooking",bg:"#DFF0ED",cl:"#5A9E8F"},
+    {t:"Spa day",bg:"#FAF0DA",cl:"#C9883A"},
+    {t:"Planejamento",bg:"#EDE5F5",cl:"#9B7BB5"}
+  ]}
+];
+
+const TIPS_DATA = [
+  {id:"skin",label:"🧴 Skincare",sections:[
+    {emoji:"🌅",title:"Rotina Matinal",items:[
+      "Lave o rosto com limpador suave (não use sabonete de corpo!)",
+      "Tônico: equilibra o pH da pele. Aplique com algodão ou mãos",
+      "Vitamina C: antioxidante poderosa. Use toda manhã sob o FPS",
+      "Hidratante: mesmo pele oleosa precisa. Escolha oil-free se necessário",
+      "FPS 50+: O PRODUTO MAIS IMPORTANTE. Reaplique a cada 2-3 horas"
+    ]},
+    {emoji:"🌙",title:"Rotina Noturna",items:[
+      "Dupla limpeza: 1° demaquilante/óleo + 2° limpador facial",
+      "Tônico: mesma rotina da manhã",
+      "Sérum: ácido hialurônico (hidratação) ou niacinamida (poros e oleosidade)",
+      "Creme noturno: mais denso que o de dia. Pele regenera à noite",
+      "Contorno dos olhos: área delicada precisa de produto específico"
+    ]},
+    {emoji:"✨",title:"Extras Semanais",items:[
+      "Esfoliação: 1-2x por semana. Remove células mortas e renova",
+      "Máscara facial: argila (oleosa), hidratante (seca), sheet mask (todas)",
+      "Massagem facial com gua sha ou roller: drena, desincha, esculpe",
+      "Lip care: esfolie e hidrate os lábios — bálsamo antes de dormir"
+    ]}
+  ]},
+  {id:"corpo",label:"💪 Corpo",sections:[
+    {emoji:"🏋️",title:"Treinos Essenciais",items:[
+      "HIIT 2-3x/semana: queima gordura e acelera metabolismo em 25 min",
+      "Musculação ou treino funcional 3x/semana: tonifica e define",
+      "Yoga 2x/semana: flexibilidade, postura e paz mental",
+      "Caminhada diária: 30 min mínimo. O exercício mais completo e simples",
+      "Alongamento: 10 min após cada treino — previne lesões e dores"
+    ]},
+    {emoji:"🥗",title:"Alimentação",items:[
+      "Proteína em toda refeição: frango, peixe, ovos, leguminosas",
+      "Vegetais coloridos: quanto mais cores no prato, mais nutrientes",
+      "Água: 2-3 litros por dia. Carregue sua garrafa para todo lugar",
+      "Reduza açúcar refinado: a pele agradece, o corpo agradece",
+      "Não pule refeições: metabolismo precisa de combustível regular"
+    ]},
+    {emoji:"😴",title:"Sono & Recuperação",items:[
+      "7-8 horas de sono: não-negociável para glow up real",
+      "Sem telas 1h antes de dormir: melatonina precisa de escuridão",
+      "Quarto fresco e escuro: qualidade do sono muda tudo",
+      "Horário fixo para dormir e acordar: seu relógio biológico agradece"
+    ]}
+  ]},
+  {id:"mente",label:"🧠 Mente",sections:[
+    {emoji:"📝",title:"Journaling",items:[
+      "Morning pages: 3 páginas de fluxo de consciência ao acordar",
+      "Gratidão: 3-5 coisas por dia. Muda a perspectiva da vida",
+      "Metas e intenções: escreva o que quer manifestar",
+      "Reflexão noturna: o que deu certo? O que aprendeu? O que melhora?",
+      "Cartas para si mesma: no passado e no futuro"
+    ]},
+    {emoji:"🧘",title:"Meditação & Mindfulness",items:[
+      "Comece com 5 minutos: sente, feche os olhos, respire",
+      "Apps recomendados: Insight Timer, Headspace, Calm (gratuitos!)",
+      "Meditação guiada para iniciantes: YouTube tem centenas",
+      "Respiração 4-7-8: inspire 4s, segure 7s, expire 8s. Acalma em minutos",
+      "Body scan antes de dormir: relaxa cada parte do corpo"
+    ]},
+    {emoji:"📚",title:"Leitura & Aprendizado",items:[
+      "30 páginas por dia = 1 livro por semana = 50 livros por ano",
+      "Livros recomendados: 'Poder do Agora', 'Hábitos Atômicos', 'Mulheres que Correm com os Lobos'",
+      "Podcasts enquanto caminha, limpa ou cozinha: aprendizado passivo",
+      "Cursos online: Coursera, Skillshare, YouTube — conhecimento é poder",
+      "Aprenda 1 idioma: 15 min/dia no Duolingo faz diferença em 50 dias"
+    ]}
+  ]},
+  {id:"estilo",label:"👗 Estilo",sections:[
+    {emoji:"👠",title:"Guarda-roupa Cápsula",items:[
+      "Invista em peças-chave: blazer, jeans escuro, camisa branca, vestido preto",
+      "Qualidade > quantidade: 1 peça boa vale mais que 10 ruins",
+      "Paleta de cores: escolha 5 cores que harmonizam entre si",
+      "Acessórios transformam: brincos, colares, lenços, cintos",
+      "Sapatos cuidados: limpos e bem conservados sempre"
+    ]},
+    {emoji:"💄",title:"Maquiagem & Perfume",items:[
+      "Pele bem cuidada = maquiagem leve. Menos é mais",
+      "Sobrancelhas feitas: o maior upgrade do rosto",
+      "Encontre SEU batom: nude, rosé ou vermelho — o que te empodera",
+      "Perfume: escolha sua assinatura olfativa. Aplique nos pulsos e pescoço",
+      "Cílios e rímel: abrem o olhar e fazem diferença enorme"
+    ]},
+    {emoji:"💎",title:"Presença & Elegância",items:[
+      "Postura ereta: ombros para trás, queixo paralelo ao chão",
+      "Andar com confiança: passos firmes, cabeça erguida",
+      "Contato visual: olhe nos olhos — transmite confiança e respeito",
+      "Voz clara e calma: não grite, não sussurre. Fale com intenção",
+      "Sorriso genuíno: a acessório mais bonito que existe"
+    ]}
+  ]},
+  {id:"espirito",label:"📖 Espírito",sections:[
+    {emoji:"🙏",title:"Oração & Fé",items:[
+      "Reserve 10-15 min diários para oração: conversa com Deus",
+      "Agradeça antes de pedir: gratidão abre portas",
+      "Entregue preocupações: 'Lançando sobre ele toda a vossa ansiedade' (1 Pedro 5:7)",
+      "Ore por outras pessoas: intercessão é poderosa",
+      "Silêncio: às vezes orar é só ficar em silêncio na presença de Deus"
+    ]},
+    {emoji:"📖",title:"Leitura Bíblica",items:[
+      "Comece por Provérbios: sabedoria prática para o dia a dia",
+      "Salmos: conforto, adoração e força nos dias difíceis",
+      "Evangelho de João: entender o amor de Deus",
+      "Anote versículos que tocam seu coração: crie seu devocional pessoal",
+      "Planos de leitura no YouVersion: estrutura e consistência"
+    ]}
+  ]}
+];
+
+const GOALS = [
+  {icon:"💪",name:"Corpo & Saúde",goals:[
+    {t:"Treinar pelo menos 4x por semana durante 50 dias",sub:"Consistência é a chave"},
+    {t:"Beber 2L de água por dia",sub:"Hidratação = glow"},
+    {t:"Dormir 7-8 horas por noite",sub:"Beleza vem do descanso"},
+    {t:"Caminhar 30 min todos os dias",sub:"Corpo em movimento"},
+    {t:"Reduzir açúcar refinado",sub:"Pele e corpo agradecem"}
+  ]},
+  {icon:"✨",name:"Beleza & Skincare",goals:[
+    {t:"Fazer skincare completa manhã e noite por 50 dias",sub:"Sem pular nenhum dia"},
+    {t:"Usar FPS todo dia sem exceção",sub:"Proteção é glow"},
+    {t:"Fazer spa day semanal",sub:"Ritual sagrado"},
+    {t:"Cuidar dos cabelos semanalmente",sub:"Hidratação e corte"},
+    {t:"Unhas sempre feitas e hidratadas",sub:"Detalhes importam"}
+  ]},
+  {icon:"🧠",name:"Mente & Conhecimento",goals:[
+    {t:"Ler pelo menos 3 livros nos 50 dias",sub:"30 páginas por dia"},
+    {t:"Journaling diário por 50 dias",sub:"Manhã e noite"},
+    {t:"Meditar 10 min por dia",sub:"Mente em paz"},
+    {t:"Fazer 1 curso online completo",sub:"Investir no conhecimento"},
+    {t:"Digital detox 1x por semana",sub:"Desconectar para reconectar"}
+  ]},
+  {icon:"👗",name:"Estilo & Presença",goals:[
+    {t:"Organizar completamente o guarda-roupa",sub:"Só o que ama fica"},
+    {t:"Criar 10 looks que ama",sub:"Seu lookbook pessoal"},
+    {t:"Praticar postura todo dia",sub:"Presença de rainha"},
+    {t:"Encontrar seu perfume assinatura",sub:"Marca olfativa pessoal"},
+    {t:"Cuidar dos sapatos e acessórios",sub:"Detalhes de IT Girl"}
+  ]},
+  {icon:"📖",name:"Espírito & Alma",goals:[
+    {t:"Leitura bíblica diária por 50 dias",sub:"Sem pular nenhum dia"},
+    {t:"Orar toda manhã e noite",sub:"Conversa com Deus"},
+    {t:"Praticar gratidão diária",sub:"3 coisas por dia"},
+    {t:"Fazer 3 atos de gentileza por semana",sub:"Espalhar amor"},
+    {t:"Perdoar alguém que magoou você",sub:"Libertar-se é poder"}
+  ]}
+];
+
+const AFFS = [
+  "Eu sou merecedora de tudo de bom que a vida tem para oferecer.",
+  "Minha beleza vem de dentro e irradia para fora.",
+  "Eu sou forte, capaz e absolutamente suficiente.",
+  "Cada dia eu me torno uma versão mais radiante de mim mesma.",
+  "Eu mereço amor, respeito e abundância em todas as áreas.",
+  "Meu corpo é meu templo e eu o trato com amor e cuidado.",
+  "Eu atraio oportunidades incríveis porque sou incrível.",
+  "Minha energia é magnética e as pessoas certas me encontram.",
+  "Eu escolho me amar primeiro — sem culpa, sem desculpas.",
+  "Sou a protagonista da minha história e escrevo finais felizes.",
+  "Minha confiança cresce a cada dia que passa.",
+  "Eu sou digna de sonhos grandes e conquistas maiores.",
+  "A mulher que eu estou me tornando vai valer toda a luta.",
+  "Eu brilho sem precisar apagar a luz de ninguém.",
+  "Minha mente é poderosa e meus pensamentos criam minha realidade.",
+  "Eu sou grata por quem sou e animada por quem estou me tornando.",
+  "Deus me criou com propósito e eu estou cumprindo o meu.",
+  "Eu me permito errar, aprender e recomeçar quantas vezes for preciso.",
+  "Minha presença é um presente para qualquer ambiente.",
+  "Eu sou a energia que quero atrair: amor, paz, abundância e alegria.",
+  "Eu não preciso da validação de ninguém — eu me valido.",
+  "Cada célula do meu corpo vibra saúde, beleza e vitalidade.",
+  "Eu sou disciplinada porque amo meus objetivos mais que meu conforto.",
+  "A vida conspira a meu favor porque eu trabalho com intenção.",
+  "Eu sou a IT Girl da minha própria era — e essa era é AGORA."
+];
+
+const ROMANTICIZE = [
+  {emoji:"☕",title:"Café ritualístico",desc:"Prepare seu café com atenção plena. Xícara bonita, música suave, sem pressa. Cada gole é um momento de presença."},
+  {emoji:"🌸",title:"Flores frescas em casa",desc:"Compre flores toda semana — nem que seja uma só. Coloque onde você mais fica. Beleza nutre a alma."},
+  {emoji:"📝",title:"Cartas escritas à mão",desc:"Escreva para si mesma, para amigas, para quem ama. A escrita à mão conecta coração e papel."},
+  {emoji:"🕯️",title:"Velas acesas",desc:"Toda noite, acenda uma vela. O ritual de ver a chama acalma, centra e transforma qualquer ambiente."},
+  {emoji:"🎵",title:"Trilha sonora da vida",desc:"Tenha playlists para cada momento: manhã, estudo, banho, cozinha. Música muda a frequência do dia."},
+  {emoji:"📚",title:"Ler em lugares bonitos",desc:"Leve seu livro para um café, parque ou varanda. O cenário transforma a leitura em experiência."},
+  {emoji:"🍃",title:"Caminhadas contemplativas",desc:"Caminhe sem fone às vezes. Ouça os pássaros, sinta o vento, observe as árvores. Reconecte com a natureza."},
+  {emoji:"✍️",title:"Journaling ao pôr do sol",desc:"Escreva suas reflexões enquanto o sol se põe. A luz dourada e as palavras criam magia pura."},
+  {emoji:"🛁",title:"Banhos sagrados",desc:"Sais, óleos essenciais, velas, música. Seu banho não é higiene — é ritual de renovação energética."},
+  {emoji:"🍽️",title:"Mesa posta para uma",desc:"Arrume a mesa mesmo quando come sozinha. Guardanapo de pano, prato bonito, copo de cristal. Você merece."},
+  {emoji:"📸",title:"Fotografe o cotidiano",desc:"Registre momentos simples: a luz na janela, seu café, as flores do caminho. Treinar o olhar é treinar a gratidão."},
+  {emoji:"🌅",title:"Assista o nascer ou pôr do sol",desc:"Pelo menos 1x por semana, pare tudo e contemple. É o espetáculo mais lindo e é gratuito."}
+];
+
+/* ═══════════════════════════════════════════════
+   STATE
+═══════════════════════════════════════════════ */
+let done = JSON.parse(localStorage.getItem('itgirl_done') || '[]');
+let goalsDone = JSON.parse(localStorage.getItem('itgirl_goals') || '[]');
+let currentSec = 'home';
+let affIdx = Math.floor(Math.random() * AFFS.length);
+
+function save() {
+  localStorage.setItem('itgirl_done', JSON.stringify(done));
+  localStorage.setItem('itgirl_goals', JSON.stringify(goalsDone));
+}
+
+/* ═══════════════════════════════════════════════
+   SPLASH
+═══════════════════════════════════════════════ */
+(function createPetals() {
+  const c = document.getElementById('petals');
+  for (let i = 0; i < 30; i++) {
+    const p = document.createElement('div');
+    p.className = 'petal';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.animationDuration = (4 + Math.random() * 6) + 's';
+    p.style.animationDelay = (Math.random() * 5) + 's';
+    p.style.width = (6 + Math.random() * 8) + 'px';
+    p.style.height = (10 + Math.random() * 10) + 'px';
+    p.style.opacity = 0.1 + Math.random() * 0.3;
+    c.appendChild(p);
+  }
+})();
+
+function startApp() {
+  document.getElementById('splash').classList.add('out');
+  setTimeout(() => {
+    document.getElementById('splash').style.display = 'none';
+    document.getElementById('app').classList.add('on');
+    renderAll();
+  }, 800);
+}
+
+/* ═══════════════════════════════════════════════
+   NAVIGATION
+═══════════════════════════════════════════════ */
+function goto(sec) {
+  currentSec = sec;
+  document.querySelectorAll('.sec').forEach(s => s.classList.remove('on'));
+  document.getElementById('s-' + sec).classList.add('on');
+  // topnav
+  const map = {home:0,dias:1,rotina:2,dicas:3,metas:4,aff:5,romantico:6};
+  document.querySelectorAll('.tnav').forEach((b,i) => b.classList.toggle('on', i === map[sec]));
+  document.querySelectorAll('.bnav-btn').forEach((b,i) => b.classList.toggle('on', i === map[sec]));
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+/* ═══════════════════════════════════════════════
+   UPDATE STATS
+═══════════════════════════════════════════════ */
+function updateStats() {
+  const count = done.length;
+  const pct = Math.round((count / 50) * 100);
+  // topbar ring
+  const circ = 94.2;
+  document.getElementById('tp-circle').setAttribute('stroke-dashoffset', circ - (circ * pct / 100));
+  document.getElementById('tp-pct').textContent = pct + '%';
+  // hero
+  document.getElementById('h-bar').style.width = pct + '%';
+  document.getElementById('h-label').textContent = count + ' de 50 dias';
+  document.getElementById('h-pct-txt').textContent = pct + '% concluído';
+  document.getElementById('h-done').textContent = count;
+  document.getElementById('h-left').textContent = 50 - count;
+  // streak
+  let streak = 0;
+  for (let i = 50; i >= 1; i--) {
+    if (done.includes(i)) streak++;
+    else break;
+  }
+  // better streak: consecutive from last done
+  streak = 0;
+  const sorted = [...done].sort((a,b) => a - b);
+  if (sorted.length) {
+    streak = 1;
+    for (let i = sorted.length - 1; i > 0; i--) {
+      if (sorted[i] - sorted[i-1] === 1) streak++;
+      else break;
+    }
+  }
+  document.getElementById('h-streak').textContent = streak;
+}
+
+function updateGoalStats() {
+  const total = GOALS.reduce((s, c) => s + c.goals.length, 0);
+  const count = goalsDone.length;
+  const pct = total ? Math.round((count / total) * 100) : 0;
+  const circ = 213.6;
+  document.getElementById('gp-circle').setAttribute('stroke-dashoffset', circ - (circ * pct / 100));
+  document.getElementById('gp-pct').textContent = pct + '%';
+  document.getElementById('gp-title').textContent = count + ' de ' + total + ' metas concluídas';
+  document.getElementById('gp-sub').textContent = pct === 100 ? 'Você é INCRÍVEL! Todas as metas conquistadas! 👑' : 'Continue marcando suas conquistas. Cada uma conta!';
+  // update counts
+  let idx = 0;
+  GOALS.forEach((cat, ci) => {
+    const el = document.getElementById('gcount-' + ci);
+    if (el) {
+      const catDone = cat.goals.filter((_, gi) => goalsDone.includes(ci + '-' + gi)).length;
+      el.textContent = catDone + '/' + cat.goals.length;
+    }
+    idx++;
+  });
+}
+
+/* ═══════════════════════════════════════════════
+   RENDER
+═══════════════════════════════════════════════ */
+function renderAll() {
+  renderPillars();
+  renderPhases();
+  renderNextDay();
+  renderDays();
+  renderRoutines();
+  renderWeek();
+  renderTips();
+  renderGoals();
+  renderAffs();
+  renderRom();
+  updateStats();
+  updateGoalStats();
+}
+
+function renderPillars() {
+  const el = document.getElementById('pillar-grid');
+  el.innerHTML = PILLARS.map(p => `
+    <div class="pillar">
+      <div class="pillar-icon">${p.icon}</div>
+      <div class="pillar-name">${p.name}</div>
+      <div class="pillar-desc">${p.desc}</div>
+    </div>
+  `).join('');
+}
+
+function renderPhases() {
+  const el = document.getElementById('phases-row');
+  el.innerHTML = PHASES.map(p => `
+    <div class="phase-tile ${p.cls}">
+      <div class="phase-days">${p.days}</div>
+      <div class="phase-name">${p.name}</div>
+      <div class="phase-desc">${p.desc}</div>
+    </div>
+  `).join('');
+}
+
+function renderNextDay() {
+  const el = document.getElementById('next-area');
+  const nextDay = DAYS.find(d => !done.includes(d.n));
+  if (!nextDay) {
+    el.innerHTML = `<div class="next-card" style="background:linear-gradient(135deg,var(--g),#8B7340)">
+      <div class="next-card-deco">👑</div>
+      <div class="next-label">Parabéns!</div>
+      <div class="next-day">Você completou todos os 50 dias!</div>
+      <div class="next-desc">Você é oficialmente a IT Girl da sua própria era. Que orgulho imenso!</div>
+    </div>`;
+    return;
+  }
+  el.innerHTML = `
+    <div class="next-card" onclick="openDay(${nextDay.n})">
+      <div class="next-card-deco">✦</div>
+      <div class="next-label">✦ Próximo desafio</div>
+      <div class="next-day">Dia ${nextDay.n} — ${nextDay.f}</div>
+      <div class="next-desc">${nextDay.act.substring(0, 120)}...</div>
+      <button class="next-btn">Ver missão completa →</button>
+    </div>
+  `;
+}
+
+function getTagStyle(c) {
+  const map = {
+    r: {bg:'#FDE8ED',cl:'#C9607A'},
+    pink: {bg:'#FDE8ED',cl:'#C9607A'},
+    coral: {bg:'#FFE8E0',cl:'#C96040'},
+    purple: {bg:'#EDE5F5',cl:'#9B7BB5'},
+    gold: {bg:'#FAF0DA',cl:'#C9883A'}
+  };
+  return map[c] || map.r;
+}
+
+function getPhaseForDay(n) {
+  if (n <= 12) return 0;
+  if (n <= 25) return 1;
+  if (n <= 38) return 2;
+  return 3;
+}
+
+function renderDays() {
+  const el = document.getElementById('days-area');
+  const phaseRanges = [
+    {label:'Fase 1 — Despertar',days:'Dias 1–12',bg:'#FDE8ED',cl:'#C9607A',from:1,to:12},
+    {label:'Fase 2 — Elevação',days:'Dias 13–25',bg:'#EDE5F5',cl:'#9B7BB5',from:13,to:25},
+    {label:'Fase 3 — Transformação',days:'Dias 26–38',bg:'#FAF0DA',cl:'#C9883A',from:26,to:38},
+    {label:'Fase 4 — Brilhar',days:'Dias 39–50',bg:'#DFF0ED',cl:'#5A9E8F',from:39,to:50}
+  ];
+  let html = '';
+  phaseRanges.forEach(phase => {
+    const phaseDays = DAYS.filter(d => d.n >= phase.from && d.n <= phase.to);
+    const phaseDone = phaseDays.filter(d => done.includes(d.n)).length;
+    html += `
+      <div class="phase-sep">
+        <div class="phase-sep-badge" style="background:${phase.bg};color:${phase.cl}">${phase.label}</div>
+        <div class="phase-sep-line"></div>
+        <div class="phase-sep-count">${phaseDone}/${phaseDays.length} ✓</div>
+      </div>
+      <div class="days-grid">
+    `;
+    phaseDays.forEach(d => {
+      const isDone = done.includes(d.n);
+      const ts = getTagStyle(d.c);
+      html += `
+        <div class="dcard${isDone ? ' done' : ''}" onclick="openDay(${d.n})">
+          <div class="dcard-num">Dia ${d.n}</div>
+          <div class="dcard-focus">${d.f}</div>
+          <span class="dtag" style="background:${ts.bg};color:${ts.cl}">${d.tag}</span>
+        </div>
+      `;
+    });
+    html += '</div>';
+  });
+  el.innerHTML = html;
+}
+
+function openDay(n) {
+  const d = DAYS.find(x => x.n === n);
+  if (!d) return;
+  const isDone = done.includes(n);
+  const ts = getTagStyle(d.c);
+  const overlay = document.createElement('div');
+  overlay.className = 'modal-overlay';
+  overlay.onclick = e => { if (e.target === overlay) overlay.remove(); };
+  overlay.innerHTML = `
+    <div class="modal">
+      <button class="modal-close" onclick="this.closest('.modal-overlay').remove()">✕</button>
+      <div class="modal-daynum">✦ Dia ${d.n} de 50</div>
+      <div class="modal-title">${d.f}</div>
+      <span class="dtag" style="background:${ts.bg};color:${ts.cl}">${d.tag}</span>
+      <div class="modal-mission">
+        <div class="modal-mission-label">✦ Missão do dia</div>
+        <p>${d.act}</p>
+      </div>
+      <div class="modal-tips">
+        <div class="modal-tips-label">Dicas para arrasar</div>
+        ${d.tips.map(t => `
+          <div class="modal-tip">
+            <div class="modal-tip-dot"></div>
+            <div>${t}</div>
+          </div>
+        `).join('')}
+      </div>
+      <button class="modal-check-btn${isDone ? ' done' : ''}" onclick="toggleDay(${n}, this)">
+        ${isDone ? '✓ Dia concluído — Parabéns!' : 'Marcar dia como concluído ✦'}
+      </button>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+}
+
+function toggleDay(n, btn) {
+  if (done.includes(n)) {
+    done = done.filter(x => x !== n);
+    btn.classList.remove('done');
+    btn.textContent = 'Marcar dia como concluído ✦';
+  } else {
+    done.push(n);
+    btn.classList.add('done');
+    btn.textContent = '✓ Dia concluído — Parabéns!';
+  }
+  save();
+  updateStats();
+  renderDays();
+  renderNextDay();
+}
+
+function renderRoutines() {
+  const el = document.getElementById('routine-area');
+  el.innerHTML = ROUTINES.map((r, i) => `
+    <div class="routine-block">
+      <div class="routine-header" onclick="toggleRoutine(this)">
+        <div class="routine-header-emoji">${r.emoji}</div>
+        <div class="routine-header-text">
+          <div class="routine-header-title">${r.title}</div>
+          <div class="routine-header-sub">${r.sub}</div>
+        </div>
+        <div class="routine-chevron">▼</div>
+      </div>
+      <div class="routine-body">
+        ${r.items.map(item => `
+          <div class="routine-item">
+            <div class="routine-item-dot"></div>
+            <div>
+              <div class="routine-item-text">${item.t}</div>
+              <div class="routine-item-time">${item.time}</div>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+function toggleRoutine(header) {
+  header.classList.toggle('open');
+  header.nextElementSibling.classList.toggle('open');
+}
+
+function renderWeek() {
+  const el = document.getElementById('week-grid');
+  el.innerHTML = WEEK.map(w => `
+    <div class="week-row">
+      <div class="week-day">${w.day}</div>
+      <div class="week-acts">
+        ${w.acts.map(a => `<span class="wact" style="background:${a.bg};color:${a.cl}">${a.t}</span>`).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderTips() {
+  const tabsEl = document.getElementById('tips-tabs');
+  const areaEl = document.getElementById('tips-area');
+  tabsEl.innerHTML = TIPS_DATA.map((cat, i) => `
+    <button class="ttab${i === 0 ? ' on' : ''}" onclick="switchTip('${cat.id}', this)">${cat.label}</button>
+  `).join('');
+  areaEl.innerHTML = TIPS_DATA.map((cat, i) => `
+    <div class="tip-category${i === 0 ? ' on' : ''}" id="tip-${cat.id}">
+      ${cat.sections.map(sec => `
+        <div class="tip-section">
+          <div class="tip-sec-header" onclick="toggleTip(this)">
+            <div class="tip-sec-emoji">${sec.emoji}</div>
+            <div class="tip-sec-title">${sec.title}</div>
+            <div class="tip-sec-chevron">▼</div>
+          </div>
+          <div class="tip-sec-body">
+            <div class="tip-list">
+              ${sec.items.map(item => `
+                <div class="tip-item">
+                  <div class="tip-item-star">✦</div>
+                  <div>${item}</div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `).join('');
+}
+
+function switchTip(id, btn) {
+  document.querySelectorAll('.ttab').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  document.querySelectorAll('.tip-category').forEach(c => c.classList.remove('on'));
+  document.getElementById('tip-' + id).classList.add('on');
+}
+
+function toggleTip(header) {
+  header.classList.toggle('open');
+  header.nextElementSibling.classList.toggle('open');
+}
+
+function renderGoals() {
+  const el = document.getElementById('goals-area');
+  el.innerHTML = GOALS.map((cat, ci) => `
+    <div class="goal-category">
+      <div class="goal-cat-head" onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? 'block' : 'none'">
+        <div class="goal-cat-icon">${cat.icon}</div>
+        <div class="goal-cat-name">${cat.name}</div>
+        <div class="goal-cat-count" id="gcount-${ci}">${cat.goals.filter((_, gi) => goalsDone.includes(ci + '-' + gi)).length}/${cat.goals.length}</div>
+      </div>
+      <div class="goal-cat-body">
+        ${cat.goals.map((g, gi) => {
+          const key = ci + '-' + gi;
+          const isDone = goalsDone.includes(key);
+          return `
+            <div class="goal-item">
+              <div class="gcheck${isDone ? ' on' : ''}" onclick="toggleGoal('${key}', this)">✓</div>
+              <div class="goal-text">
+                ${g.t}
+                <div class="goal-sub">${g.sub}</div>
+              </div>
+            </div>
+          `;
+        }).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+function toggleGoal(key, el) {
+  if (goalsDone.includes(key)) {
+    goalsDone = goalsDone.filter(x => x !== key);
+    el.classList.remove('on');
+  } else {
+    goalsDone.push(key);
+    el.classList.add('on');
+  }
+  save();
+  updateGoalStats();
+}
+
+function renderAffs() {
+  document.getElementById('aff-today').textContent = AFFS[affIdx];
+  const el = document.getElementById('aff-grid');
+  el.innerHTML = AFFS.map((a, i) => `
+    <div class="aff-card">
+      <div class="aff-card-num">Afirmação ${i + 1}</div>
+      <div class="aff-card-text">${a}</div>
+    </div>
+  `).join('');
+}
+
+function nextAff() {
+  affIdx = (affIdx + 1) % AFFS.length;
+  const el = document.getElementById('aff-today');
+  el.style.opacity = 0;
+  setTimeout(() => {
+    el.textContent = AFFS[affIdx];
+    el.style.opacity = 1;
+  }, 300);
+}
+
+function renderRom() {
+  const el = document.getElementById('rom-area');
+  el.innerHTML = '<div class="rom-grid">' + ROMANTICIZE.map(r => `
+    <div class="rom-card">
+      <div class="rom-emoji">${r.emoji}</div>
+      <div class="rom-title">${r.title}</div>
+      <div class="rom-desc">${r.desc}</div>
+    </div>
+  `).join('') + '</div>';
+}
+</script>
+</body>
+</html>
